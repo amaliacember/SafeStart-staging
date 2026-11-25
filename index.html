@@ -6,208 +6,223 @@
   <title>SafeStart – a safe phone, the day your client leaves</title>
   <meta name="description" content="SafeStart gives caseworkers a spyware check and a clean, ready-to-use phone for clients leaving a controlling relationship.">
   <meta name="robots" content="noindex">
+  <link rel="preload" href="fonts/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/source-serif-4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
+        // Default Tailwind palette switched off: only the demo tokens exist.
+        colors: {
+          transparent: 'transparent',
+          current: 'currentColor',
+          paper: '#f4f2ec',
+          sheet: '#fffdf8',
+          ink: { DEFAULT: '#1d2824', soft: '#46544e' },
+          line: '#d9dbd2',
+          edge: '#6b7872',
+          pine: { DEFAULT: '#1f4d40', deep: '#143a30', wash: '#e3ebe5' },
+          amber: { DEFAULT: '#f0b23e', wash: '#fbf0d6', ink: '#7a4e00' },
+          alert: { DEFAULT: '#9e2a1f', wash: '#f8e5e1' },
+          petrol: { DEFAULT: '#1f5c7a', deep: '#174762', wash: '#e1ecf1' }
+        },
         extend: {
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
-          colors: {
-            ink: '#1f2d2b',
-            sage: { 50: '#f4f8f6', 100: '#e6f0ec', 200: '#cfe1da', 500: '#4f8a7b', 600: '#3f7366', 700: '#325c52' }
-          }
+          fontFamily: {
+            sans: ['"Atkinson Hyperlegible"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            serif: ['"Source Serif 4"', 'Georgia', 'serif']
+          },
+          borderRadius: { control: '4px', sheet: '6px' },
+          fontSize: { small: '0.9375rem', lead: '1.3125rem' }
         }
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }</style>
-</head>
-<body class="bg-white font-sans text-ink antialiased">
+  <style>
+    @font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); }
 
-  <!-- Draft banner: remove before the page goes live on 25 Nov -->
-  <div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-sm text-center px-4 py-2">
-    Draft.
-  </div>
+    html { font-size: 106.25%; scroll-padding-top: 5.5rem; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+    h1, h2, h3 { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; line-height: 1.2; text-wrap: balance; }
+    p { text-wrap: pretty; }
+    ::selection { background: #1f4d40; color: #fffdf8; }
+    input, textarea { caret-color: #1f4d40; }
+
+    /* Focus everywhere */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #1f4d40; outline-offset: 3px; }
+  </style>
+</head>
+<body class="bg-paper font-sans text-ink leading-relaxed antialiased">
 
   <!-- Header -->
-  <header class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2 font-semibold text-lg tracking-tight rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.2 7.5 10 4.4-1.8 7.5-5.4 7.5-10v-6L12 2.5Z" fill="#e6f0ec" stroke="#3f7366" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="m8.8 12.2 2.4 2.4 4.2-4.6" stroke="#3f7366" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      SafeStart
-    </a>
-    <a href="#for-organisations" class="text-sm font-medium text-sage-700 hover:text-sage-600 py-3 -my-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2">For organisations</a>
+  <header class="sticky top-0 z-20 bg-paper border-b-2 border-ink">
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-between gap-4">
+      <a href="#top" class="inline-flex items-center gap-2 min-h-[48px] py-2 font-serif font-semibold text-xl text-ink">
+        <svg class="text-pine shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.2 7.5 10 4.4-1.8 7.5-5.4 7.5-10v-6L12 2.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="m8.8 12.2 2.4 2.4 4.2-4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        SafeStart
+      </a>
+      <nav aria-label="Page sections" class="flex items-center gap-5 text-small font-bold">
+        <a href="#how-it-works" class="hidden sm:inline-flex items-center min-h-[48px] text-pine underline decoration-2 underline-offset-4 hover:text-pine-deep">How it works</a>
+        <a href="#for-organisations" class="inline-flex items-center min-h-[48px] text-pine underline decoration-2 underline-offset-4 hover:text-pine-deep">For organisations</a>
+      </nav>
+    </div>
   </header>
 
   <main id="top">
 
-    <!-- 1. Hero -->
-    <section class="max-w-5xl mx-auto px-6 pt-10 pb-24 md:pt-20 md:pb-32 grid md:grid-cols-2 gap-14 items-center">
-      <div>
-        <p class="text-sm font-medium text-sage-600 mb-4">For caseworkers and support organisations</p>
-        <h1 class="text-4xl md:text-5xl font-semibold leading-tight tracking-tight">
-          A safe phone, the day your client leaves.
-        </h1>
-        <p class="mt-6 text-lg text-slate-600 leading-relaxed">
-          SafeStart gives caseworkers a spyware check and a clean, ready-to-use phone for clients leaving a controlling relationship.
-        </p>
-        <div class="mt-9">
-          <a href="#signup" data-event="request-pilot-info"
-             class="inline-block bg-sage-600 hover:bg-sage-700 text-white font-medium rounded-lg px-7 py-3.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2">
-            Request pilot info
-          </a>
-        </div>
-      </div>
-
-      <!-- Phone visual -->
-      <div class="flex justify-center" aria-hidden="true">
-        <div class="relative">
-          <svg class="relative" width="230" height="440" viewBox="0 0 230 440" fill="none">
-            <rect x="6" y="6" width="218" height="428" rx="36" fill="#fff" stroke="#cfe1da" stroke-width="3"/>
-            <rect x="16" y="16" width="198" height="408" rx="28" fill="#f4f8f6"/>
-            <rect x="88" y="26" width="54" height="10" rx="5" fill="#cfe1da"/>
-            <path d="M115 120 68 140v38c0 29 19 52 47 63 28-11 47-34 47-63v-38l-47-20Z" fill="#e6f0ec" stroke="#3f7366" stroke-width="3" stroke-linejoin="round"/>
-            <path d="m93 182 16 16 29-31" stroke="#3f7366" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="52" y="282" width="126" height="10" rx="5" fill="#cfe1da"/>
-            <rect x="70" y="304" width="90" height="10" rx="5" fill="#e6f0ec"/>
-            <rect x="62" y="358" width="106" height="34" rx="17" fill="#3f7366"/>
-          </svg>
-        </div>
+    <!-- 1. Top section -->
+    <section class="max-w-5xl mx-auto px-4 pt-12 pb-14 sm:pt-20 sm:pb-20">
+      <p class="text-small text-ink-soft mb-4">For caseworkers and support organisations</p>
+      <h1 class="text-[2rem] sm:text-[2.5rem] text-ink max-w-prose">
+        A safe phone, the day your client leaves.
+      </h1>
+      <p class="mt-5 font-serif text-lead leading-snug text-ink-soft max-w-prose">
+        SafeStart gives caseworkers a spyware check and a clean, ready-to-use phone for clients leaving a controlling relationship.
+      </p>
+      <div class="mt-8">
+        <a href="https://form.typeform.com/to/abqzXwpq" target="_blank" rel="noopener" data-event="request-pilot-info"
+           class="inline-flex items-center min-h-[48px] px-6 rounded-control bg-petrol hover:bg-petrol-deep text-sheet font-bold transition-colors">
+          Register your interest
+        </a>
       </div>
     </section>
 
     <!-- 2. The problem -->
-    <section class="bg-sage-50">
-      <div class="max-w-3xl mx-auto px-6 py-24 md:py-28 text-center">
-        <h2 class="text-3xl font-semibold tracking-tight mb-6">The problem</h2>
-        <p class="text-2xl md:text-3xl leading-snug font-medium">
-          About 4 in 10 people say a partner or ex has checked or controlled their phone.
+    <section class="max-w-5xl mx-auto px-4 pb-14 sm:pb-20">
+      <h2 class="relative z-10 -mb-[2px] inline-block border-2 border-b-0 border-ink rounded-t-sheet bg-sheet px-4 pt-1.5 pb-1 text-xl">The problem</h2>
+      <div class="border-2 border-ink rounded-sheet rounded-tl-none bg-sheet px-5 py-7 sm:px-8 sm:py-9">
+        <p class="font-serif text-[1.5rem] sm:text-[1.75rem] leading-snug text-ink max-w-prose">
+          In the first Belgian study on digital violence in relationships, <span class="font-semibold text-petrol tabular-nums">39%</span> of people said their online activity had been checked or monitored without their consent.
         </p>
-        <p class="mt-6 text-lg text-slate-600 leading-relaxed">
+        <p class="mt-5 text-ink-soft max-w-prose">
           Caseworkers see it every week, but have no time or tools to fix it.
         </p>
-        <!-- TEAM TO DO: add the real source of the 39% figure before 25 Nov -->
-        <p class="mt-8 text-xs text-slate-600">
-          Figure: 39% of people, from studies cited in our research. <span class="text-amber-700">[Draft: add full source]</span>
+        <p class="mt-7 pt-4 border-t border-line text-small text-ink-soft">
+          <a href="https://news.belgium.be/nl/node/42711/pdf" class="text-pine underline decoration-2 underline-offset-4 hover:text-pine-deep">IGVM/IEFH, Digital violence in dating and partner relationships in Belgium (Universiteit Antwerpen, UGent, ULB), January <span class="tabular-nums">2026</span>.</a>
         </p>
       </div>
     </section>
 
     <!-- 3. How it works -->
-    <section class="max-w-5xl mx-auto px-6 py-24 md:py-32">
-      <h2 class="text-3xl font-semibold tracking-tight text-center">How it works</h2>
-      <p class="mt-3 text-center text-slate-600">Three steps, one appointment.</p>
+    <section id="how-it-works" class="max-w-5xl mx-auto px-4 pb-14 sm:pb-20">
+      <h2 class="relative z-10 -mb-[2px] inline-block border-2 border-b-0 border-ink rounded-t-sheet bg-sheet px-4 pt-1.5 pb-1 text-xl">How it works</h2>
 
-      <div class="mt-16 grid md:grid-cols-3 gap-10">
-        <div>
-          <div class="w-11 h-11 rounded-full bg-sage-100 text-sage-700 font-semibold flex items-center justify-center">1</div>
-          <h3 class="mt-5 text-lg font-semibold">Scan the phone</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed">Check for stalkerware in about 10 minutes. No IT skills needed.</p>
-        </div>
-        <div>
-          <div class="w-11 h-11 rounded-full bg-sage-100 text-sage-700 font-semibold flex items-center justify-center">2</div>
-          <h3 class="mt-5 text-lg font-semibold">Order a clean phone</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed">A certified refurbished phone, set up with new accounts.</p>
-        </div>
-        <div>
-          <div class="w-11 h-11 rounded-full bg-sage-100 text-sage-700 font-semibold flex items-center justify-center">3</div>
-          <h3 class="mt-5 text-lg font-semibold">Move over and save evidence</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed">Photos and contacts are moved and evidence is saved, all in one appointment.</p>
-        </div>
+      <div class="border-2 border-ink rounded-sheet rounded-tl-none bg-sheet px-5 pt-7 pb-2 sm:px-8 sm:pt-9 md:pb-9">
+      <p class="text-ink-soft">Three steps, one appointment.</p>
+      <ol class="mt-4 md:mt-7 grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-line">
+        <li class="grid grid-cols-[2rem_1fr] gap-x-3 py-5 md:py-0 md:pr-7">
+          <span class="font-serif font-semibold text-2xl leading-tight text-pine tabular-nums">1</span>
+          <div>
+            <h3 class="text-lg text-ink">Scan the phone</h3>
+            <p class="mt-1 text-ink-soft">Check for stalkerware in about <span class="tabular-nums">10</span> minutes. No IT skills needed.</p>
+          </div>
+        </li>
+        <li class="grid grid-cols-[2rem_1fr] gap-x-3 py-5 md:py-0 md:px-7">
+          <span class="font-serif font-semibold text-2xl leading-tight text-pine tabular-nums">2</span>
+          <div>
+            <h3 class="text-lg text-ink">Order a clean phone</h3>
+            <p class="mt-1 text-ink-soft">A certified refurbished phone, set up with new accounts.</p>
+          </div>
+        </li>
+        <li class="grid grid-cols-[2rem_1fr] gap-x-3 py-5 md:py-0 md:pl-7">
+          <span class="font-serif font-semibold text-2xl leading-tight text-pine tabular-nums">3</span>
+          <div>
+            <h3 class="text-lg text-ink">Move over and save evidence</h3>
+            <p class="mt-1 text-ink-soft">Photos and contacts are moved and evidence is saved, all in one appointment.</p>
+          </div>
+        </li>
+      </ol>
       </div>
     </section>
 
     <!-- 4. For organisations -->
-    <section class="bg-sage-50" id="for-organisations">
-      <div class="max-w-5xl mx-auto px-6 py-24 md:py-28">
-        <h2 class="text-3xl font-semibold tracking-tight text-center">For organisations</h2>
+    <section class="max-w-5xl mx-auto px-4 pb-14 sm:pb-20" id="for-organisations">
+      <h2 class="relative z-10 -mb-[2px] inline-block border-2 border-b-0 border-ink rounded-t-sheet bg-petrol-wash px-4 pt-1.5 pb-1 text-xl text-petrol-deep">For organisations</h2>
 
-        <div class="mt-14 grid md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-2xl p-7 border border-sage-200">
-            <h3 class="font-semibold">Fixed price per package</h3>
-            <p class="mt-2 text-slate-600 text-sm leading-relaxed">You know the cost before you start, so it fits a subsidy budget.</p>
+      <div class="border-2 border-ink rounded-sheet rounded-tl-none bg-sheet px-5 py-7 sm:px-8 sm:py-9">
+        <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-line">
+          <div class="pb-5 md:pb-0 md:pr-7">
+            <h3 class="text-lg text-ink">Planned fixed price per package</h3>
+            <p class="mt-1 text-ink-soft">You know the cost before you start, so it fits a subsidy budget.</p>
           </div>
-          <div class="bg-white rounded-2xl p-7 border border-sage-200">
-            <h3 class="font-semibold">GDPR by design</h3>
-            <p class="mt-2 text-slate-600 text-sm leading-relaxed">Case numbers only. We store no client data.</p>
+          <div class="py-5 md:py-0 md:px-7">
+            <h3 class="text-lg text-ink">GDPR by design</h3>
+            <p class="mt-1 text-ink-soft">Case numbers only. We store no client data.</p>
           </div>
-          <div class="bg-white rounded-2xl p-7 border border-sage-200">
-            <h3 class="font-semibold">Training for your team</h3>
-            <p class="mt-2 text-slate-600 text-sm leading-relaxed">Caseworkers get the guidance they need to run it themselves.</p>
+          <div class="pt-5 md:pt-0 md:pl-7">
+            <h3 class="text-lg text-ink">Training for your team</h3>
+            <p class="mt-1 text-ink-soft">Caseworkers get the guidance they need to run it themselves.</p>
           </div>
         </div>
 
-        <p class="mt-12 text-center text-lg font-medium text-sage-700">
-          Pilot spots for 3 CAW offices in 2027.
+        <p class="mt-8 border-l-4 border-pine bg-pine-wash px-4 py-3 font-bold text-ink">
+          Pilot spots for <span class="tabular-nums">3</span> CAW offices in <span class="tabular-nums">2027</span>.
         </p>
       </div>
     </section>
 
     <!-- 5. Sign-up -->
-    <section id="signup" class="max-w-xl mx-auto px-6 py-24 md:py-32">
-      <h2 class="text-3xl font-semibold tracking-tight text-center">Request pilot info</h2>
-      <p class="mt-3 text-center text-slate-600">Leave your details and we will get in touch. This page is for professionals.</p>
+    <section id="signup" class="max-w-5xl mx-auto px-4 pb-16 sm:pb-24">
+      <h2 class="relative z-10 -mb-[2px] inline-block border-2 border-b-0 border-ink rounded-t-sheet bg-sheet px-4 pt-1.5 pb-1 text-xl">Register your interest</h2>
+      <div class="border-2 border-ink rounded-sheet rounded-tl-none bg-sheet px-5 py-7 sm:px-8 sm:py-9">
+        <p class="text-ink-soft max-w-prose">Register your interest in a short form. We will get in touch about this student project. This page is for professionals.</p>
 
-      <!-- Placeholder form. Replace this whole <form> with the Tally / Google Forms embed. -->
-      <form id="pilot-form" class="mt-10 space-y-5">
-        <div>
-          <label for="name" class="block text-sm font-medium mb-1.5">Name</label>
-          <input id="name" type="text" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sage-500">
+        <div class="mt-7">
+          <a href="https://form.typeform.com/to/abqzXwpq" target="_blank" rel="noopener" data-event="submit-pilot-form" aria-describedby="form-link-note"
+             class="inline-flex items-center justify-center w-full sm:w-auto min-h-[48px] px-6 rounded-control bg-petrol hover:bg-petrol-deep text-sheet font-bold transition-colors">
+            Register your interest
+          </a>
+          <p id="form-link-note" class="mt-3 text-small text-ink-soft">
+            Opens a short form (4 questions). We only use your details to contact you about this student project, and we delete them after the course ends. No client information, please.
+          </p>
         </div>
-        <div>
-          <label for="org" class="block text-sm font-medium mb-1.5">Organisation</label>
-          <input id="org" type="text" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sage-500">
-        </div>
-        <div>
-          <label for="role" class="block text-sm font-medium mb-1.5">Role</label>
-          <input id="role" type="text" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sage-500">
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium mb-1.5">Email</label>
-          <input id="email" type="email" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sage-500">
-        </div>
-        <div>
-          <label for="need" class="block text-sm font-medium mb-1.5">What would you need from SafeStart? <span class="text-slate-600 font-normal">(optional)</span></label>
-          <textarea id="need" rows="3" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sage-500"></textarea>
-        </div>
-        <button type="submit" data-event="submit-pilot-form"
-                class="w-full bg-sage-600 hover:bg-sage-700 text-white font-medium rounded-lg px-7 py-3.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2">
-          Request pilot info
-        </button>
-        <p id="form-note" class="hidden text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-          Draft version: the form is not connected yet. Nothing was sent.
-        </p>
-        <p class="text-xs text-slate-600 text-center leading-relaxed">
-          We only use your details to reply about the pilot. [Draft: final privacy line goes here.]
-        </p>
-      </form>
 
-      <p class="mt-10 text-center text-sm text-slate-500">
-        Have used company phones?
-        <a href="#donate" data-event="donate-phones" class="text-sage-700 underline underline-offset-4 hover:text-sage-600 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2">Donate them.</a>
-      </p>
+        <p class="mt-8 pt-5 border-t border-line text-ink-soft">
+          Interested in donating used phones in the future?
+          <a href="https://form.typeform.com/to/abqzXwpq" target="_blank" rel="noopener" data-event="donate-phones" class="inline-flex items-center min-h-[48px] -my-3 font-bold text-pine underline decoration-2 underline-offset-4 hover:text-pine-deep">Tell us in the form.</a>
+        </p>
+      </div>
     </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200">
-    <div class="max-w-5xl mx-auto px-6 py-12 text-sm text-slate-600 space-y-3 text-center">
+  <footer class="border-t-2 border-ink bg-paper">
+    <div class="max-w-5xl mx-auto px-4 py-8 text-base text-ink-soft text-center space-y-2">
       <p>SafeStart is a student project at Thomas More, currently being tested.</p>
-      <p>In danger? Call <strong class="text-base text-ink">112</strong>. Questions about violence: <strong class="text-base text-ink">1712</strong> (free, anonymous).</p>
+      <p>SafeStart is a student project (Thomas More). It is not a live service yet, and we can&rsquo;t guarantee it will launch. We are testing whether it would be useful.</p>
+      <p>In danger? Call <strong class="font-bold text-ink tabular-nums">112</strong>. Questions about violence: <strong class="font-bold text-ink tabular-nums">1712</strong> (free, anonymous).</p>
     </div>
   </footer>
 
   <script>
-    // Placeholder only. Remove when the real form is embedded.
-    document.getElementById('pilot-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      document.getElementById('form-note').classList.remove('hidden');
+    // ---- Settings ----
+    const GOATCOUNTER_CODE = 'safestart-test';
+    // ------------------
+
+    // Load GoatCounter (cookie-free analytics). If it is blocked, nothing else breaks.
+    (function () {
+      var gc = document.createElement('script');
+      gc.async = true;
+      gc.setAttribute('data-goatcounter', 'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count');
+      gc.src = 'https://gc.zgo.at/count.js';
+      document.head.appendChild(gc);
+    })();
+
+    // Count clicks on every element with a data-event attribute.
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest ? e.target.closest('[data-event]') : null;
+      if (!el || !window.goatcounter || typeof window.goatcounter.count !== 'function') return;
+      var name = el.getAttribute('data-event');
+      try {
+        window.goatcounter.count({ event: true, path: name, title: name });
+      } catch (err) { /* analytics must never break the page */ }
     });
   </script>
 </body>
